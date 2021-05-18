@@ -1,10 +1,9 @@
 import React from 'react'
+import MainContainer from './containers/MainContainer'
 
 function App() {
   return (
-    <div>
-      <h1>This is the app compoenent</h1>
-    </div>
+    <MainContainer />
   )
 }
 
