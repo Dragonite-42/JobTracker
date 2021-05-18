@@ -23,6 +23,7 @@
 	"homepage": "https://github.com/kirstenyoon/JobTracker#readme",
 	"dependencies": {
 		"@material-ui/core": "^4.11.4",
+		"bcryptjs": "^2.4.3",
 		"cross-env": "^7.0.3",
 		"dotenv": "^9.0.2",
 		"express": "^4.17.1",
