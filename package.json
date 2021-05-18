@@ -1,0 +1,45 @@
+{
+	"name": "jobtracker",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"start": "nodemon server/server.js",
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"build": "NODE_ENV=production webpack",
+		"macdev": "NODE_ENV=development webpack-dev-server & npm start",
+		"windev": "cross-env process.env.NODE_ENV=development concurrently \"webpack-dev-server --open\" \" npm start\""
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/kirstenyoon/JobTracker.git"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/kirstenyoon/JobTracker/issues"
+	},
+	"homepage": "https://github.com/kirstenyoon/JobTracker#readme",
+	"dependencies": {
+		"@material-ui/core": "^4.11.4",
+		"express": "^4.17.1",
+		"pg": "^8.6.0",
+		"react": "^17.0.2",
+		"react-dom": "^17.0.2"
+	},
+	"devDependencies": {
+		"@babel/core": "^7.13.14",
+		"@babel/preset-env": "^7.14.1",
+		"@babel/preset-react": "^7.13.13",
+		"babel-loader": "^8.2.2",
+		"concurrently": "^4.1.0",
+		"css-loader": "^5.2.0",
+		"html-webpack-plugin": "^3.2.0",
+		"nodemon": "^1.18.9",
+		"style-loader": "^0.23.1",
+		"webpack": "^4.46.0",
+		"webpack-cli": "^3.2.3",
+		"webpack-dev-server": "^3.1"
+	}
+}
