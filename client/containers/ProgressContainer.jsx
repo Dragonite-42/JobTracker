@@ -3,10 +3,10 @@ import JobCard from '../components/Card';
 
 function ProgressContainer() {
 
+  //create array of job cards
 
   return (
     <div>
-      Progress Container
       <JobCard />
     </div>
   )
