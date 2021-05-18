@@ -1,11 +1,20 @@
-import React from 'react'
+import React from 'react';
+import Button from '@material-ui/core/Button';
+import AddIcon from '@material-ui/icons/Add';
+import { makeStyles } from '@material-ui/core/styles';
 
-function MainContainer(){
-    return(
+import ProgressContainer from './ProgressContainer';
+// import styles from '../styling/containers/MainContainer.css';
+
+function MainContainer() {
+    return (
         <div>
-            <h1>HELLO!!!</h1>
+            <Button variant="contained" color="primary">
+                Add Card
+            </Button>
+            <ProgressContainer id='progressContainer' />
         </div>
     )
 }
 
-export default MainContainer
+export default MainContainer;
