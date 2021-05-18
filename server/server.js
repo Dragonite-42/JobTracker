@@ -14,6 +14,11 @@ app.use(express.urlencoded({ extended: true }));
 // handle requests for static files
 app.use(express.static(path.resolve(__dirname, '../client')));
 
+// Renders homepage
+// app.get('/', (req, res) => {
+// 	res.render('../client/index.html');
+// });
+
 // handle routes
 app.use('/jobs', jobsRouter);
 app.use('/users', userRouter);

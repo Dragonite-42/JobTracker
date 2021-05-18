@@ -20,6 +20,7 @@ userController.addUser = (req, res, next) => {
 			return next();
 		})
 		.catch((err) => {
+			// res.redirect('/createAccount');
 			return next({ log: err, message: 'userController.addUser failed' });
 		});
 };

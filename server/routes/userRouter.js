@@ -3,8 +3,11 @@ const router = express.Router();
 const userController = require('../controllers/userController');
 
 // Create a user account
-router.post('/createAccount', userController.addUser, (req, res) =>
-	res.status(200).json({ success: true })
+router.post(
+	'/createAccount',
+	userController.addUser,
+	(req, res) => res.status(200).json({ success: true })
+	// res.redirect('/login');
 );
 
 // Delete a user account
@@ -23,3 +26,5 @@ router.get('/logout', userController.logout, (req, res) => {
 });
 
 module.exports = router;
+
+// npm i passport passport-local express-session express-flash
