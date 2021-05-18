@@ -8,7 +8,7 @@ router.post('/createAccount', userController.addUser, (req, res) =>
 );
 
 // Delete a user account
-router.delete('/deleteAccount/:id', userController.deleteUser, (req, res) =>
+router.delete('/deleteAccount/', userController.deleteUser, (req, res) =>
 	res.status(200).json({ success: true })
 );
 

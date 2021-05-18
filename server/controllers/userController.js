@@ -24,7 +24,8 @@ userController.addUser = (req, res, next) => {
 
 // DELETE user account
 userController.deleteUser = (req, res, next) => {
-	const id = parseInt(req.params.id);
+	const { id } = req.body;
+	console.log('id', id);
 	const query = `DELETE FROM users WHERE _id=${id}`;
 	db.query(query)
 		.then(() => {
