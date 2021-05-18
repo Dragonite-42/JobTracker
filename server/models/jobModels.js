@@ -1,7 +1,9 @@
 const { Pool } = require('pg');
+const dotenv = require('dotenv');
 
-const PG_URI =
-	'postgres://zdkkkscr:g4D1FGXn45XwqAn6lW__kVGIAjt5XNfD@queenie.db.elephantsql.com/zdkkkscr';
+dotenv.config();
+
+const { PG_URI } = process.env;
 
 const pool = new Pool({
 	connectionString: PG_URI,
@@ -12,3 +14,6 @@ module.exports = {
 		return pool.query(text, params, callback);
 	},
 };
+
+// To view database in terminal:
+// psql postgres://ugkfnyme:bNJrg812ELPmMtI5ItOP2SMHWtUCqCjl@kashin.db.elephantsql.com/ugkfnyme
