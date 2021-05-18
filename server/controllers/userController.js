@@ -1,20 +1,22 @@
-const db = require('../models/jobModels');
+const db = require('../models/query');
 const bcrypt = require('bcryptjs');
 
 const userController = {};
 
 // CREATE new user account
 userController.addUser = (req, res, next) => {
-	const { firstname, lastname, username, password } = req.body;
+	const { firstname, lastname, username, email, password } = req.body;
 	const salt = bcrypt.genSaltSync(10);
 	const hashed_password = bcrypt.hashSync(password, salt);
 	const queryString = `INSERT INTO users(firstname,
 		lastname,
 		username,
+    email,
 		hashed_password)
-    VALUES('${firstname}', '${lastname}', '${username}', '${hashed_password}')`;
+    VALUES('${firstname}', '${lastname}', '${username}', '${email}', '${hashed_password}')`;
 	db.query(queryString)
 		.then(() => {
+			console.log('success');
 			return next();
 		})
 		.catch((err) => {
@@ -65,7 +67,7 @@ userController.verifyUser = (req, res, next) => {
 		.catch((err) => next(err));
 };
 
-//LOGOUT
+// LOGOUT
 userController.logout = (req, res, next) => {
 	res.locals.msg = "You're logged out!";
 	return next();

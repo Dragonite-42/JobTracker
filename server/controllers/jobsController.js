@@ -1,4 +1,4 @@
-const db = require('../models/jobModels');
+const db = require('../models/query');
 
 const jobsController = {};
 
