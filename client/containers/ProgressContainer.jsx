@@ -5,7 +5,7 @@ function ProgressContainer(props) {
   const jobArray = [];
   for (let i = 0; i < props.progArray.length; i++) {
     jobArray.push(
-      <JobCard jobInfo={props.progArray[i]} />
+      <JobCard key={i} jobInfo={props.progArray[i]} />
     )
   }
 
