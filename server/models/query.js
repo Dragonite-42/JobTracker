@@ -16,4 +16,4 @@ module.exports = {
 };
 
 // To view database in terminal:
-// psql postgres://ugkfnyme:bNJrg812ELPmMtI5ItOP2SMHWtUCqCjl@kashin.db.elephantsql.com/ugkfnyme
+ //psql postgres://ugkfnyme:bNJrg812ELPmMtI5ItOP2SMHWtUCqCjl@kashin.db.elephantsql.com/ugkfnyme
