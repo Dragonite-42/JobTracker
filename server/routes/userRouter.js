@@ -17,15 +17,21 @@ router.delete('/deleteAccount', userController.deleteUser, (req, res) =>
 	res.status(200).json({ success: true })
 );
 
+// router.get('/loginpage', (req, res) => {
+// 	res.redirect('../../client/index.html');
+// });
+
 // Verify user
-router.get(
+router.post(
 	'/login',
 	userController.verifyUser,
 	// use passport.authenticate(), specifying the 'local' strategy, to authenticate requests
 	passport.authenticate('local', {
 		successRedirect: '/', // routes not working
-		failureRedirect: '/login', // change this to page you want to redirect to. /loginpage caught 500 error
-		failureFlash: true, // displays message to user from getUserByUsername
+		// failureRedirect: '/',
+		// failureRedirect: '/loginpage', // change this to page you want to redirect to
+		// failureFlash: true, // displays message to user from getUserByUsername
+		failureFlash: 'Please try again', // displays message to user from getUserByUsername
 	}),
 	(req, res) => {
 		res.status(200).json(res.locals.msg);

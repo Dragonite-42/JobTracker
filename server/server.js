@@ -49,7 +49,7 @@ const getUserById = async (id) => {
 		.query(queryString)
 		.then((user) => {
 			if (user.rows.length !== 0) {
-				console.log('USER FOUND BY ID:', user.rows[0]);
+				// console.log('USER FOUND BY ID:', user.rows[0]);
 				userData = user.rows[0];
 			} else {
 				console.log('user not found');
