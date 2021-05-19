@@ -4,7 +4,7 @@ import AddIcon from '@material-ui/icons/Add';
 import { makeStyles } from '@material-ui/core/styles';
 import ProgressContainer from './ProgressContainer';
 // import styles from '../styling/containers/MainContainer.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import '../stylesheets/index.css';
 
 const useStyles = makeStyles({
@@ -29,11 +29,22 @@ function MainContainer() {
     array.push(
       <div>
         {hiringStep[i]}
-        <ProgressContainer id={i} />
+        <ProgressContainer progression={'progression_' + i} />
       </div>
     )
   }
-
+  // note: if useEffect function is invoked in the progress container, it's invoked as many times as the number of containers (4 times), so I guess it's more ideal to invoke it in the main container? 
+  useEffect(() => {
+    return fetch(`/jobs/getJobs/${1}`)
+      .then(response => response.json())
+      .then(jobs => {
+        console.log(jobs)
+        jobs.forEach(job => {
+          // 1. we need to ask backend to add a key-value for progression in the job object
+          // 2. how do we insert the job card into Progress container
+        })
+      })
+  })
 
   function handleClick(event) {
     modalBoolean === false ? setModalBoolean(true) : setModalBoolean(false);
@@ -41,22 +52,22 @@ function MainContainer() {
 
   console.log('modalBoolean', modalBoolean);
 
-  function getAllJobs(user) {
-    const getJobs = fetch(exampleurl)
-      .then(
-        response.json())
-      .then(jobs => {
-        const array = []
-        jobs.forEach((job) => {
-          const something = <Card jobs.desciption job.progression />
-          // filter cards based on progression
-          if (job.progression === 0) // rendering it in the progress container id 0
-            if (job.progression === 1) // rendering it in the progress container id 1
-              array.push(something)
-          this.setState(array)
-        })
-      })
-  }
+  // function getAllJobs(user) {
+  //   const getJobs = fetch(exampleurl)
+  //     .then(
+  //       response.json())
+  //     .then(jobs => {
+  //       const array = []
+  //       jobs.forEach((job) => {
+  //         const something = <Card jobs.desciption job.progression />
+  //         // filter cards based on progression
+  //         if (job.progression === 0) // rendering it in the progress container id 0
+  //           if (job.progression === 1) // rendering it in the progress container id 1
+  //             array.push(something)
+  //         this.setState(array)
+  //       })
+  //     })
+  // }
   /*
 
   array of object
