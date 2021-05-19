@@ -13,7 +13,7 @@ router.post(
 );
 
 // Delete a user account
-router.delete('/deleteAccount/', userController.deleteUser, (req, res) =>
+router.delete('/deleteAccount', userController.deleteUser, (req, res) =>
 	res.status(200).json({ success: true })
 );
 
