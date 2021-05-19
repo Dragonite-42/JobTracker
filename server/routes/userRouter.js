@@ -23,8 +23,8 @@ router.get(
 	userController.verifyUser,
 	// use passport.authenticate(), specifying the 'local' strategy, to authenticate requests
 	passport.authenticate('local', {
-		successRedirect: '/',
-		failureRedirect: '/login',
+		successRedirect: '/', // routes not working
+		failureRedirect: '/login', // change this to page you want to redirect to. /loginpage caught 500 error
 		failureFlash: true, // displays message to user from getUserByUsername
 	}),
 	(req, res) => {
