@@ -8,12 +8,12 @@ router.get('/getJobs/:user_id', jobsController.getJobs, (req, res) =>
 );
 
 //POST job for specified user
-router.post('/addJob/', jobsController.addJob, (req, res) =>
+router.post('/addJob', jobsController.addJob, (req, res) =>
 	res.status(200).json(res.locals.message)
 );
 
 //DELETE job for specified user
-router.delete('/deleteJob/', jobsController.deleteJob, (req, res) =>
+router.delete('/deleteJob', jobsController.deleteJob, (req, res) =>
 	res.status(200).json(res.locals.message)
 );
 
