@@ -16,7 +16,7 @@ const useStyles = makeStyles({
 
 function MainContainer() {
   const classes = useStyles();
-  const array = [];
+  // const array = [];
   const hiringStep = [
     'Need to Apply',
     'Application Sent',
@@ -25,54 +25,58 @@ function MainContainer() {
   ]
   // make array of ProgressContainers
   const [modalBoolean, setModalBoolean] = useState(false)
-  for (let i = 0; i < hiringStep.length; i++) {
-    array.push(
-      <div>
-        {hiringStep[i]}
-        <ProgressContainer progression={'progression_' + i} />
-      </div>
-    )
-  }
-  // note: if useEffect function is invoked in the progress container, it's invoked as many times as the number of containers (4 times), so I guess it's more ideal to invoke it in the main container? 
+  const [jobCardArray, setJobCardArray] = useState([]);
+
+  const prog1 = [];
+  const prog2 = [];
+  const prog3 = [];
+  const prog4 = [];
+
   useEffect(() => {
-    return fetch(`/jobs/getJobs/${1}`)
+    console.log('inside useEffect')
+    fetch(`/jobs/getJobs/${1}`)
       .then(response => response.json())
-      .then(jobs => {
-        console.log(jobs)
-        jobs.forEach(job => {
-          // 1. we need to ask backend to add a key-value for progression in the job object
-          // 2. how do we insert the job card into Progress container
+      .then(array => {
+        array.forEach(job => {
+          if (job.progression === 1) {
+            prog1.push(job);
+            console.log('prog1 length, ', prog1.length)
+          }
+          if (job.progression === 2) {
+            prog2.push(job)
+            console.log(prog2.length)
+          }
+          if (job.progression === 3) {
+            prog3.push(job);
+            console.log(prog3.length)
+          }
+          if (job.progression === 4) {
+            prog4.push(job);
+            console.log(prog4.length)
+          }
         })
       })
-  })
+      .then(() => sortCardsByProgression())
+  }, [])
+
+  function sortCardsByProgression() {
+    const populatedJobCardArray = [];
+    for (let i = 1; i <= hiringStep.length; i++) {
+      let currentArray = eval(`prog${i}`);
+      populatedJobCardArray.push(
+        <div>
+          {hiringStep[i - 1]}
+          <ProgressContainer progArray={currentArray} />
+        </div>
+      )
+    }
+    setJobCardArray(populatedJobCardArray);
+  }
 
   function handleClick(event) {
     modalBoolean === false ? setModalBoolean(true) : setModalBoolean(false);
   }
 
-  console.log('modalBoolean', modalBoolean);
-
-  // function getAllJobs(user) {
-  //   const getJobs = fetch(exampleurl)
-  //     .then(
-  //       response.json())
-  //     .then(jobs => {
-  //       const array = []
-  //       jobs.forEach((job) => {
-  //         const something = <Card jobs.desciption job.progression />
-  //         // filter cards based on progression
-  //         if (job.progression === 0) // rendering it in the progress container id 0
-  //           if (job.progression === 1) // rendering it in the progress container id 1
-  //             array.push(something)
-  //         this.setState(array)
-  //       })
-  //     })
-  // }
-  /*
-
-  array of object
-  
-  */
   return (
     <div>
       <div>
@@ -91,7 +95,7 @@ function MainContainer() {
         }
       </div>
       <div className={classes.progress}>
-        {array}
+        {jobCardArray}
       </div>
     </div>
   )

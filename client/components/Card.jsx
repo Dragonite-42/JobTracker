@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function JobCard() {
+export default function JobCard(props) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
   const handleExpandClick = () => {
@@ -36,14 +36,14 @@ export default function JobCard() {
   return (
     <Card className={classes.root}>
       <CardHeader
-        title="Google"
-        subheader="Software Engineer II"
+        title={props.jobInfo.company_name}
+        subheader={props.jobInfo.job_title}
       />
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
           Next Appointment:
           <br></br>
-          Date here
+          {props.jobInfo.next_appointment}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
@@ -62,12 +62,12 @@ export default function JobCard() {
         <CardContent>
           <Typography paragraph>Description:
           <br></br>
-            Info
+            {props.jobInfo.job_description}
           </Typography>
           <Typography paragraph>
             Contact:
           <br></br>
-            Contact info
+            {props.jobInfo.contact}
           </Typography>
         </CardContent>
       </Collapse>
