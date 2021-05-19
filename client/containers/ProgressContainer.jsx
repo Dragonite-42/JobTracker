@@ -3,7 +3,9 @@ import JobCard from '../components/Card';
 
 function ProgressContainer() {
 
-  //create array of job cards
+  // id = 4
+  // fetch (params: user_id, progression #)
+  // response = jobs with progression # that is for this specific container
 
   return (
     <div>

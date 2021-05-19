@@ -41,7 +41,9 @@ export default function JobCard() {
       />
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
-          Job Description here or something
+          Next Appointment:
+          <br></br>
+          Date here
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
@@ -58,19 +60,14 @@ export default function JobCard() {
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <Typography paragraph>Next Appointment:
+          <Typography paragraph>Description:
           <br></br>
-            Date here
+            Info
           </Typography>
           <Typography paragraph>
             Contact:
           <br></br>
-            Contact info here
-          </Typography>
-          <Typography>
-            Entry Point:
-          <br></br>
-            LinkedIn/Indeed/Recruiter/Email/etc.
+            Contact info
           </Typography>
         </CardContent>
       </Collapse>
