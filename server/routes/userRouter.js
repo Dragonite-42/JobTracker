@@ -11,7 +11,7 @@ router.post(
 );
 
 // Delete a user account
-router.delete('/deleteAccount/', userController.deleteUser, (req, res) =>
+router.delete('/deleteAccount', userController.deleteUser, (req, res) =>
 	res.status(200).json({ success: true })
 );
 
@@ -26,5 +26,3 @@ router.get('/logout', userController.logout, (req, res) => {
 });
 
 module.exports = router;
-
-// npm i passport passport-local express-session express-flash
