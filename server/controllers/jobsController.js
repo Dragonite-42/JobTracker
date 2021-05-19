@@ -46,19 +46,27 @@ jobsController.deleteJob = (req, res, next) => {
 
 // PATCH (edit) specified job from jobs table
 jobsController.editJob = (req, res, next) => {
-	const { jobId, next_appointment, progression, job_description_link} = req.body;
+	const { jobId, next_appointment, progression, job_description_link } = req.body;
+  
+	let editJobQuery = `SET `;
+	const values = [];
 
-	const editJobQuery = `UPDATE users 
-	SET job_description_link = $1, progression = $2, next_appointment = $3
-	WHERE _id=${jobId}`;;
-	// if ()
-	// `UPDATE users 
-	// SET job_description_link = $1, progression = $2, next_appointment = $3
-	// WHERE _id=${jobId}`;
+	if (next_appointment) {
+		editJobQuery += 'next_appointment = $1';
+		values.push(next_appointment);
+	}
+	else if (progression) {
+		editJobQuery += 'progression = $1';
+		values.push(progression);
+	}
+	else {
+		editJobQuery += `job_description_link = $1`;
+		values.push(job_description_link);
+	}
 
-	const values = [job_description_link, progression, next_appointment];
+  const complete = `UPDATE jobs ` + editJobQuery + ` WHERE _id=${jobId} `
 
-	db.query(editJobQuery, values)
+	db.query(complete, values)
 		.then((editedJob) => {
 			res.locals.message = 'Job has been successfully edited';
 			return next();
