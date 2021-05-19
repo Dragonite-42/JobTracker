@@ -52,11 +52,6 @@ userController.verifyUser = (req, res, next) => {
 			}
 
 			// verify login information
-			// console.log(
-			// 	'userController HEREEEE',
-			// 	password,
-			// 	user.rows[0].hashed_password
-			// );
 			const verified = bcrypt.compareSync(
 				password,
 				user.rows[0].hashed_password
