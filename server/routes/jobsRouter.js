@@ -18,7 +18,7 @@ router.delete('/deleteJob/', jobsController.deleteJob, (req, res) =>
 );
 
 //PATCH specified job for specified user
-router.patch('/editJob/', jobsController.editJob, (req, res) =>
+router.patch('/editJob', jobsController.editJob, (req, res) =>
 	res.status(200).json(res.locals.message)
 );
 
