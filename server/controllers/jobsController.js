@@ -46,6 +46,7 @@ jobsController.deleteJob = (req, res, next) => {
 
 // PATCH (edit) specified job from jobs table
 jobsController.editJob = (req, res, next) => {
+	console.log(req.body);
 	const { jobId, next_appointment, progression, job_description_link} = req.body;
 
 	const editJobQuery = `UPDATE users 
