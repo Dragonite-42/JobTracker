@@ -6,9 +6,11 @@ const jobsRouter = require('./routes/jobsRouter');
 const userRouter = require('./routes/userRouter');
 
 const PORT = 3000;
+const cors = require('cors');
 
 // handle parsing request body
 app.use(express.json());
+app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 
 // handle requests for static files
