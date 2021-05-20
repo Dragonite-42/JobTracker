@@ -34,6 +34,7 @@ router.post(
 		failureFlash: 'Please try again', // displays message to user from getUserByUsername
 	}),
 	(req, res) => {
+		console.log('res.req.session', res.req.session);
 		console.log('res.req.session.auth', res.req.session.auth);
 		res.locals.auth = res.req.session.auth;
 		// res.status(200).json(res.req.session.auth);
@@ -44,7 +45,7 @@ router.post(
 router.get('/checkSession', (req, res) => {
 	console.log('/checkSession route');
 	// console.log('req.session', req.session);
-	res.locals.auth = req.session.auth;
+	res.locals.auth = { auth: req.session.auth };
 	console.log('res.locals.auth', req.session.auth);
 	res.status(200).json(res.locals.auth);
 });
@@ -52,8 +53,8 @@ router.get('/checkSession', (req, res) => {
 // Logout
 router.get('/logout', userController.logout, (req, res) => {
 	req.logOut(); // from passport. clears sessions and logs user out
-	// res.redirect('/login');
-	res.status(200).json(res.locals.msg);
+	res.redirect('/');
+	// res.status(200).json(res.locals.msg);
 });
 
 // maybe turn this into another middleware
