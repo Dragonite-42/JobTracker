@@ -21,7 +21,7 @@ const getUserByUsername = async (username) => {
 	await db
 		.query(queryString)
 		.then((user) => {
-			// console.log('rows', user.rows);
+			console.log('rows', user.rows);
 			// console.log('rows length', user.rows.length);
 			// console.log('rows[0]', user.rows[0]);
 			if (user.rows.length !== 0) {

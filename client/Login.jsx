@@ -10,7 +10,10 @@ const Login = () => {
 			body: JSON.stringify({ username, password }),
 		})
 			.then((res) => res.json())
-			.then((data) => console.log('LOGIN Data:', data));
+			.then((data) => {
+				console.log('LOGIN Data:', data)
+				window.location.reload();
+			});
 	};
 
 	const handleUsernameChange = (event) => {

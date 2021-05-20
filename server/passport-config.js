@@ -13,6 +13,7 @@ const bcrypt = require('bcryptjs');
 // initialize function contains logic, to be invoked in server.js
 const initialize = (passport, getUserByUsername, getUserById) => {
 	// authentiates user
+	// console.log('passportconfig initialize:', username, password);
 	const authenticateUser = async (username, password, done) => {
 		// console.log('USERNAME', username);
 		const user = await getUserByUsername(username);
@@ -21,6 +22,7 @@ const initialize = (passport, getUserByUsername, getUserById) => {
 			return done(null, false, { message: 'No user with that email' });
 		}
 		// console.log('passport-config pw check', password, user.hashed_password);
+		console.log('user in authenticateUser', user);
 		try {
 			if (bcrypt.compareSync(password, user.hashed_password)) {
 				// If the credentials are valid, the verify callback invokes done to supply Passport with the user that authenticated.
