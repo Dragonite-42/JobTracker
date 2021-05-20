@@ -5,7 +5,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import ProgressContainer from './ProgressContainer';
 import { useState, useEffect } from 'react';
 
-
 const useStyles = makeStyles({
   progress: {
     display: 'flex',
@@ -25,7 +24,7 @@ function MainContainer() {
   // make array of ProgressContainers
   const [modalBoolean, setModalBoolean] = useState(false)
   const [jobCardArray, setJobCardArray] = useState([]);
-  const [newCard, setNewCard] = useState();
+  const [newCard, setNewCard] = useState({});
 
   const prog1 = [];
   const prog2 = [];
@@ -33,8 +32,7 @@ function MainContainer() {
   const prog4 = [];
 
   useEffect(() => {
-    console.log('inside useEffect')
-    fetch(`/jobs/getJobs/${1}`)
+    fetch(`/jobs/getJobs/1`)
       .then(response => response.json())
       .then(array => {
         array.forEach(job => {
@@ -57,7 +55,7 @@ function MainContainer() {
         })
       })
       .then(() => sortCardsByProgression())
-  }, [])
+  }, [newCard])
 
   function sortCardsByProgression() {
     const populatedJobCardArray = [];
@@ -80,16 +78,21 @@ function MainContainer() {
    backend query = 
    company_name, job_title, note, progression, next_appointment, contact 
   */
-  function handleSubmit(event) {
-    event.preventDefault();
+  function handleSubmit() {
+    // event.preventDefault();
     console.log('submit clicked')
-    console.log(getElementById('name').value)
+    console.log(document.getElementById('name').value)
     const data = {
+      user_id: 1,
       company_name: document.getElementById('name').value,
       job_title: document.getElementById('title').value,
-      progression: 1
+      notes: document.getElementById('notes').value,
+      progression: document.getElementById('progression').value,
+      next_appointment: document.getElementById('appointment').value,
+      contact: document.getElementById('contact').value,
     }
-    fetch('/jobs/addJobs', {
+
+    fetch('/jobs/addJob', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -98,6 +101,7 @@ function MainContainer() {
     })
       .then(res => res.json())
       .then(addedCard => {
+        console.log('addedCard', addedCard)
         setNewCard(addedCard);
       })
   }
@@ -105,19 +109,25 @@ function MainContainer() {
   return (
     <div>
       <div>
-        <Button variant="contained" color="primary" onClick={(event) => handleClick(event)}>
+        <Button variant="contained" color="primary" onClick={(event) => handleClick()}>
           Add Job
         </Button>
       </div>
       <div className='modal'>
         {modalBoolean === true && <div>
-          <form onSubmit={() => handleSubmit()}>
-            <input id='name' placeholder='Company Name'></input>
-            <br></br>
-            <input id='title' placeholder='Job Title'></input>
-            <br></br>
-            <input type='submit' value='Submit'></input>
-          </form>
+          <input id='name' placeholder='Company Name'></input>
+          <br></br>
+          <input id='title' placeholder='Job Title'></input>
+          <br></br>
+          <input id='appointment' placeholder='Next Appointment Date'></input>
+          <br></br>
+          <input id='notes' placeholder='Notes'></input>
+          <br></br>
+          <input id='progression' placeholder='Hiring Stage'></input>
+          <br></br>
+          <input id='contact' placeholder='Contact Info'></input>
+          <br></br>
+          <button onClick={() => handleSubmit()}>Submit</button>
         </div>
         }
       </div>

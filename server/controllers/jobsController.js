@@ -16,6 +16,7 @@ jobsController.getJobs = (req, res, next) => {
 
 // POST job to jobs table
 jobsController.addJob = (req, res, next) => {
+	console.log('req.body', req.body)
 	const {
 		user_id,
 		company_name,
@@ -41,6 +42,7 @@ jobsController.addJob = (req, res, next) => {
 
 	db.query(addJobQuery, values)
 		.then((addedJob) => {
+			console.log(addedJob)
 			res.locals.message = 'Job has been successfully added';
 			return next();
 		})
