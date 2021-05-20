@@ -21,7 +21,7 @@ const getUserByUsername = async (username) => {
 	await db
 		.query(queryString)
 		.then((user) => {
-			// console.log('rows', user.rows);
+			console.log('rows', user.rows);
 			// console.log('rows length', user.rows.length);
 			// console.log('rows[0]', user.rows[0]);
 			if (user.rows.length !== 0) {
@@ -138,7 +138,7 @@ app.use((err, req, res, next) => {
 	};
 	const errorObj = Object.assign({}, defaultErr, err);
 	console.log('ERROR TYPE: ', err);
-	console.log(errorObj.log);
+	console.log('errerObj log', errorObj.log);
 	return res.status(errorObj.status).json(errorObj.message);
 });
 

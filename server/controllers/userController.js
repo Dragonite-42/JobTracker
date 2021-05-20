@@ -40,6 +40,8 @@ userController.deleteUser = (req, res, next) => {
 // VERIFY user exists
 userController.verifyUser = (req, res, next) => {
 	const { username, password } = req.body;
+	console.log('USER INFO:', username, password);
+	// console.log('VERIFY USER:', username, password);
 	const queryString = `SELECT * FROM users WHERE username='${username}'`;
 
 	db.query(queryString)
@@ -57,19 +59,37 @@ userController.verifyUser = (req, res, next) => {
 				user.rows[0].hashed_password
 			);
 
+			console.log('USERCONTROLLER.VERIFYUSER verified:', verified)
+
 			if (verified) {
+				req.session.auth = true;
+				// console.log('REQ SESSION authorized:', req.session);
+				console.log('REQ SESSION authorized');
 				res.locals.msg = 'You have been successfully logged in.';
 			} else {
+				// console.log('REQ SESSION not authorized:', req.session);
+				console.log('REQ SESSION not authorized');
 				res.locals.msg =
 					'The username and password you entered did not match our records. Please double-check and try again.';
 			}
 			return next();
 		})
-		.catch((err) => next(err));
+		.catch((err) => {
+			console.log('userController.verifyUser ERROR:', err)
+			next(err)
+		});
 };
 
 // LOGOUT
 userController.logout = (req, res, next) => {
+	// req.session.destroy(function (err) {
+	// 	if (err) {
+	// 		res.locals =
+	// 			'There was a problem with logging out. Please check that you are logged in.';
+	// 		return next();
+	// 	}
+	// 	next();
+	// });
 	res.locals.msg = "You're logged out!";
 	return next();
 };
