@@ -14,14 +14,12 @@ const useStyles = makeStyles({
 
 function MainContainer() {
   const classes = useStyles();
-  // const array = [];
   const hiringStep = [
     'Need to Apply',
     'Application Sent',
     'Phone Interview',
     'Tech Interview'
   ]
-  // make array of ProgressContainers
   const [modalBoolean, setModalBoolean] = useState(false)
   const [jobCardArray, setJobCardArray] = useState([]);
   const [newCard, setNewCard] = useState({});
@@ -55,7 +53,7 @@ function MainContainer() {
         })
       })
       .then(() => sortCardsByProgression())
-  }, [newCard])
+  }, [newCard, jobCardArray])
 
   function sortCardsByProgression() {
     const populatedJobCardArray = [];
@@ -64,7 +62,7 @@ function MainContainer() {
       populatedJobCardArray.push(
         <div>
           {hiringStep[i - 1]}
-          <ProgressContainer key={i} progArray={currentArray} />
+          <ProgressContainer key={i} progArray={currentArray} jobCardArray={jobCardArray} />
         </div>
       )
     }
@@ -74,14 +72,7 @@ function MainContainer() {
   function handleClick(event) {
     modalBoolean === false ? setModalBoolean(true) : setModalBoolean(false);
   }
-  /*
-   backend query = 
-   company_name, job_title, note, progression, next_appointment, contact 
-  */
   function handleSubmit() {
-    // event.preventDefault();
-    console.log('submit clicked')
-    console.log(document.getElementById('name').value)
     const data = {
       user_id: 1,
       company_name: document.getElementById('name').value,
@@ -91,7 +82,6 @@ function MainContainer() {
       next_appointment: document.getElementById('appointment').value,
       contact: document.getElementById('contact').value,
     }
-
     fetch('/jobs/addJob', {
       method: 'POST',
       headers: {

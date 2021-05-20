@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
@@ -12,6 +13,7 @@ import clsx from 'clsx';
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    minWidth: 250,
     maxWidth: 250,
   },
   expand: {
@@ -33,6 +35,24 @@ export default function JobCard(props) {
     setExpanded(!expanded);
   };
 
+  function deleteCard() {
+    const data = {
+      id: props.jobInfo._id
+    }
+    fetch('/jobs/deleteJob', {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+      .then(res => res.json())
+      .then(deletedCard => {
+        console.log('deletedCard', deletedCard)
+        // setNewCard(deletedCard);
+      })
+  }
+
   return (
     <Card className={classes.root}>
       <CardHeader
@@ -42,11 +62,17 @@ export default function JobCard(props) {
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
           Next Appointment:
+          <Button size="small">
+            Edit
+          </Button>
           <br></br>
           {props.jobInfo.next_appointment}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
+        <Button size="small" variant="contained" onClick={(e) => deleteCard()}>
+          delete
+        </Button>
         <IconButton
           className={clsx(classes.expand, {
             [classes.expandOpen]: expanded,
@@ -61,8 +87,11 @@ export default function JobCard(props) {
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
           <Typography paragraph>Description:
-          <br></br>
-            {props.jobInfo.job_description}
+          <Button size="small">
+              Edit
+          </Button>
+            <br></br>
+            {props.jobInfo.notes}
           </Typography>
           <Typography paragraph>
             Contact:
