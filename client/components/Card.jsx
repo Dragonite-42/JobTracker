@@ -53,6 +53,16 @@ export default function JobCard(props) {
       })
   }
 
+  // function postDate(){
+  //   const newDate = getElementById('newapoointment')
+  //   const data: {
+  //     next_appointment:  
+  //   }
+  //   fetch('./jobs/editJob', data)
+  //     .then(res => res.json())
+  // }
+
+
   return (
     <Card className={classes.root}>
       <CardHeader
@@ -62,11 +72,9 @@ export default function JobCard(props) {
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
           Next Appointment:
-          <Button size="small">
-            Edit
-          </Button>
           <br></br>
-          {props.jobInfo.next_appointment}
+          <input id='newappointment' type='text' placeholder={props.jobInfo.next_appointment}></input>
+          <Button size="small">Edit</Button>
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
@@ -87,9 +95,6 @@ export default function JobCard(props) {
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
           <Typography paragraph>Description:
-          <Button size="small">
-              Edit
-          </Button>
             <br></br>
             {props.jobInfo.notes}
           </Typography>
