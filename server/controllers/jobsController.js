@@ -91,7 +91,7 @@ jobsController.editJob = (req, res, next) => {
 			return next();
 		})
 		.catch((err) => {
-			console.log(err);
+			console.log('editJob err', err);
 			return next({ message: 'Error has occured at jobsController.deleteJob' });
 		});
 };

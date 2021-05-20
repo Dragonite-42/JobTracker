@@ -40,6 +40,7 @@ userController.deleteUser = (req, res, next) => {
 // VERIFY user exists
 userController.verifyUser = (req, res, next) => {
 	const { username, password } = req.body;
+	// console.log('VERIFY USER:', username, password);
 	const queryString = `SELECT * FROM users WHERE username='${username}'`;
 
 	db.query(queryString)
@@ -58,8 +59,13 @@ userController.verifyUser = (req, res, next) => {
 			);
 
 			if (verified) {
+				req.session.auth = true;
+				// console.log('REQ SESSION authorized:', req.session);
+				console.log('REQ SESSION authorized');
 				res.locals.msg = 'You have been successfully logged in.';
 			} else {
+				// console.log('REQ SESSION not authorized:', req.session);
+				console.log('REQ SESSION not authorized');
 				res.locals.msg =
 					'The username and password you entered did not match our records. Please double-check and try again.';
 			}

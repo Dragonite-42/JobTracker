@@ -27,16 +27,27 @@ router.post(
 	userController.verifyUser,
 	// use passport.authenticate(), specifying the 'local' strategy, to authenticate requests
 	passport.authenticate('local', {
-		successRedirect: '/', // routes not working
+		// successRedirect: '/', // routes not working
 		// failureRedirect: '/',
 		// failureRedirect: '/loginpage', // change this to page you want to redirect to
 		// failureFlash: true, // displays message to user from getUserByUsername
 		failureFlash: 'Please try again', // displays message to user from getUserByUsername
 	}),
 	(req, res) => {
-		res.status(200).json(res.locals.msg);
+		console.log('res.req.session.auth', res.req.session.auth);
+		res.locals.auth = res.req.session.auth;
+		// res.status(200).json(res.req.session.auth);
+		res.status(200).json(res.locals.auth);
 	}
 );
+
+router.get('/checkSession', (req, res) => {
+	console.log('/checkSession route');
+	// console.log('req.session', req.session);
+	res.locals.auth = req.session.auth;
+	console.log('res.locals.auth', req.session.auth);
+	res.status(200).json(res.locals.auth);
+});
 
 // Logout
 router.get('/logout', userController.logout, (req, res) => {
