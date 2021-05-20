@@ -138,7 +138,7 @@ app.use((err, req, res, next) => {
 	};
 	const errorObj = Object.assign({}, defaultErr, err);
 	console.log('ERROR TYPE: ', err);
-	console.log(errorObj.log);
+	console.log('errerObj log', errorObj.log);
 	return res.status(errorObj.status).json(errorObj.message);
 });
 
