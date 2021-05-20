@@ -1,5 +1,7 @@
 const express = require('express');
 const router = express.Router();
+const passport = require('passport');
+const jobsController = require('../controllers/jobsController');
 const userController = require('../controllers/userController');
 
 // Create a user account
@@ -15,14 +17,39 @@ router.delete('/deleteAccount', userController.deleteUser, (req, res) =>
 	res.status(200).json({ success: true })
 );
 
+// router.get('/loginpage', (req, res) => {
+// 	res.redirect('../../client/index.html');
+// });
+
 // Verify user
-router.get('/login', userController.verifyUser, (req, res) => {
-	res.status(200).json(res.locals.msg);
-});
+router.post(
+	'/login',
+	userController.verifyUser,
+	// use passport.authenticate(), specifying the 'local' strategy, to authenticate requests
+	passport.authenticate('local', {
+		successRedirect: '/', // routes not working
+		// failureRedirect: '/',
+		// failureRedirect: '/loginpage', // change this to page you want to redirect to
+		// failureFlash: true, // displays message to user from getUserByUsername
+		failureFlash: 'Please try again', // displays message to user from getUserByUsername
+	}),
+	(req, res) => {
+		res.status(200).json(res.locals.msg);
+	}
+);
 
 // Logout
 router.get('/logout', userController.logout, (req, res) => {
+	req.logOut(); // from passport. clears sessions and logs user out
+	// res.redirect('/login');
 	res.status(200).json(res.locals.msg);
 });
+
+// maybe turn this into another middleware
+// router.delete('/logout', (req, res) => {
+// 	// need npm i method-override to call delete function from html
+// 	req.logOut(); // from passport. clears sessions and logs user out
+// 	res.redirect('/login');
+// });
 
 module.exports = router;
