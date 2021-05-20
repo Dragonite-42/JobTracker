@@ -27,7 +27,8 @@ jobsController.addJob = (req, res, next) => {
 	} = req.body;
 	const addJobQuery = `
 	INSERT INTO jobs (user_id, company_name, job_title, notes, progression, next_appointment, contact)
-	VALUES ($1, $2, $3, $4, $5, $6, $7)`;
+	VALUES ($1, $2, $3, $4, $5, $6, $7)
+	RETURNING *`;
 
 	const values = [
 		user_id,
@@ -41,7 +42,7 @@ jobsController.addJob = (req, res, next) => {
 
 	db.query(addJobQuery, values)
 		.then((addedJob) => {
-			res.locals.message = 'Job has been successfully added';
+			res.locals.addedJob = addedJob.rows[0];
 			return next();
 		})
 		.catch((err) =>

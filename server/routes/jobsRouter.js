@@ -9,7 +9,7 @@ router.get('/getJobs/:user_id', jobsController.getJobs, (req, res) =>
 
 //POST job for specified user
 router.post('/addJob', jobsController.addJob, (req, res) =>
-	res.status(200).json(res.locals.message)
+	res.status(200).json(res.locals.addedJob)
 );
 
 //DELETE job for specified user
