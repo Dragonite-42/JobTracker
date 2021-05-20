@@ -16,6 +16,7 @@ jobsController.getJobs = (req, res, next) => {
 
 // POST job to jobs table
 jobsController.addJob = (req, res, next) => {
+	console.log('req.body', req.body)
 	const {
 		user_id,
 		company_name,
