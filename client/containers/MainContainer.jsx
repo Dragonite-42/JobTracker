@@ -4,6 +4,7 @@ import AddIcon from '@material-ui/icons/Add';
 import { makeStyles } from '@material-ui/core/styles';
 import ProgressContainer from './ProgressContainer';
 import { useState, useEffect } from 'react';
+import { Typography } from '@material-ui/core';
 
 const useStyles = makeStyles({
   progress: {
@@ -99,12 +100,12 @@ function MainContainer() {
   return (
     <div>
       <div>
-        <Button variant="contained" color="primary" onClick={(event) => handleClick()}>
-          Add Job
-        </Button>
-      </div>
-      <div className='modal'>
-        {modalBoolean === true && <div>
+        <div>
+        </div>
+        <Typography>
+          New Job Card
+        </Typography>
+        <div className='modal'>
           <input id='name' placeholder='Company Name'></input>
           <br></br>
           <input id='title' placeholder='Job Title'></input>
@@ -117,9 +118,10 @@ function MainContainer() {
           <br></br>
           <input id='contact' placeholder='Contact Info'></input>
           <br></br>
-          <button onClick={() => handleSubmit()}>Submit</button>
+          <Button variant="contained" color="primary" onClick={(event) => handleSubmit()}>
+            Add Job
+          </Button>
         </div>
-        }
       </div>
       <div className={classes.progress}>
         {jobCardArray}

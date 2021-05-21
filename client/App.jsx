@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import MainContainer from './containers/MainContainer';
+import GlobalStyle from './globalStyles'
 import Login from './Login';
 // import Login from './SignUp';
 
@@ -46,14 +47,15 @@ function App() {
 		// 	<MainContainer />
 		// </div>
 
-	// SAMPLE
+		// SAMPLE
 		<main>
+			<GlobalStyle />
 			{/* {user === 'user' && <Redirect to="/loggedIn" />}
 			{user === 'admin' && <Redirect to="/admin" />}
 		  if auth===true redirect to jobs page
 		  */}
-			{user === true && <Redirect to="loggedIn"/>}
-	
+			{user === true && <Redirect to="loggedIn" />}
+
 			<Switch>
 				<Route exact path="/" component={Login} />
 				<Route path="/loggedIn" component={MainContainer} />
